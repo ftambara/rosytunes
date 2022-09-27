@@ -50,6 +50,8 @@ gem "bootsnap", require: false
 # rubocop:enable Layout/LineLength
 # gem "image_processing", "~> 1.2"
 
+gem "haml"
+
 group :development, :test do
   # rubocop:disable Layout/LineLength
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
