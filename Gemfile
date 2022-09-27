@@ -27,10 +27,12 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
-# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
+# Use Kredis to get higher-level data types in Redis
+# [https://github.com/rails/kredis]
 # gem "kredis"
 
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
+# Use Active Model has_secure_password
+# [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -42,11 +44,17 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 # gem "sassc-rails"
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# rubocop:disable Layout/LineLength
+# Use Active Storage variants
+# [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# rubocop:enable Layout/LineLength
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
+  # rubocop:disable Layout/LineLength
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  # rubocop:enable Layout/LineLength
+
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 
   # Use sqlite3 as the database for Active Record
@@ -62,15 +70,21 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  gem "rubocop-rails"
+  gem "rubocop-performance"
+  gem "rubocop-minitest"
+  gem "rubocop-packaging"
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  # Use system testing
+  # [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
 end
 
 group :pg do
-  gem 'pg'
+  gem "pg"
 end
