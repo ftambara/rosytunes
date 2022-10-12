@@ -1,0 +1,9 @@
+%header
+  %nav.navbar
+    #logo
+      RosyTunes
+    #feedback= button_to "Feedback", "#"
+    - if @user
+      #user_nav User
+    - else
+      #guest_nav Guest
