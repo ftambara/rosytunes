@@ -51,6 +51,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "haml"
+gem "tailwindcss-rails"
 
 group :development, :test do
   # rubocop:disable Layout/LineLength
