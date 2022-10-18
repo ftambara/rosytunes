@@ -1,9 +1,9 @@
 %header
-  %nav.navbar{class: "bg-rose-700 py-2 px-4 flex gap-4 justify-between
-  items-center text-white"}
+  %nav.navbar{class: "w-full py-3 px-4 flex flex-wrap gap-4 justify-between
+  items-center bg-rose-700 text-white"}
     .logo
-      = link_to (image_tag "logo.svg", size: "120"), root_url
-    .interactions{class: "p-2 flex gap-16 items-center"}
+      = link_to (image_tag "logo.svg", size: "120"), root_url, class: "inline"
+    .interactions{class: "p-2 flex flex-wrap gap-x-16 gap-y-4 items-center"}
       .feedback
         = button_to "Feedback", "#", class: "btn-special"
       .user{class: "object-center"}
@@ -14,4 +14,4 @@
             = button_to "Log Out", "#", class: "btn-secondary"
         - else
           .guest_nav
-            = button_to "Log In", "#", class: "btn-primary" |
+            = button_to "Log In", "#", class: "btn-primary"
