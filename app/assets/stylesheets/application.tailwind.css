@@ -2,12 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
 @layer components {
   .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+    @apply h-8 px-3 bg-white text-rose-700 font-bold rounded
+           hover:brightness-90 active:text-sky-800
+  }
+  .btn-secondary {
+    @apply h-8 px-3 bg-rose-700 text-white font-bold border rounded
+           hover:brightness-110 active:bg-sky-800
+  }
+
+  .btn-special {
+    @apply h-8 px-3 bg-sky-800 text-white font-bold border rounded
+           hover:brightness-110 active:border-none
   }
 }
 
-*/
