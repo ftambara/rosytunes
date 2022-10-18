@@ -2,7 +2,8 @@
   %nav.navbar{class: "w-full py-3 px-4 flex flex-wrap gap-4 justify-between
   items-center bg-rose-700 text-white"}
     .logo
-      = link_to (image_tag "logo.svg", size: "120"), root_path, class: "inline"
+      = link_to (show_svg "logo.svg", "fill-white h-[1.5rem] w-[7.5rem]"),
+        root_path
     .interactions{class: "p-2 flex flex-wrap gap-x-16 gap-y-4 items-center"}
       .feedback
         = button_to "Feedback", "#", class: "btn-special"
