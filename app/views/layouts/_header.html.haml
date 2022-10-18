@@ -6,7 +6,8 @@
         root_path
     .interactions{class: "p-2 flex flex-wrap gap-x-16 gap-y-4 items-center"}
       .feedback
-        = button_to "Feedback", "#", class: "btn-special"
+        = link_to (show_svg "github.svg", "fill-white h-6"),
+          "https://github.com/ftambara/rosytunes", class: "inline"
       .user{class: "object-center"}
         - if @user
           .user_nav{class:"flex gap-4 items-center"}
