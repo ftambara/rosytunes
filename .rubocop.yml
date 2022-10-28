@@ -5,10 +5,6 @@ Layout/LineLength:
   Exclude: 
     - 'config/**/*'
 
-# Style
-Style/FrozenStringLiteralComment:
-  EnforcedStyle: never
-
 # Metrics
 Metrics/PerceivedComplexity:
   Enabled: true
@@ -53,6 +49,7 @@ AllCops:
     - 'actiontext/test/dummy/**/*'
     - '**/node_modules/**/*'
     - 'bin/**/*'
+    - 'db/schema.rb'
 
 Performance:
   Exclude:
