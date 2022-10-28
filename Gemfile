@@ -53,15 +53,15 @@ gem "bootsnap", require: false
 gem "haml"
 gem "tailwindcss-rails"
 
+gem "pg"
+
 group :development, :test do
   # rubocop:disable Layout/LineLength
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   # rubocop:enable Layout/LineLength
 
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-
-  # Use sqlite3 as the database for Active Record
-  gem "sqlite3", "~> 1.4"
+  gem "dotenv-rails"
 end
 
 group :development do
@@ -86,8 +86,4 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-end
-
-group :pg do
-  gem "pg"
 end
