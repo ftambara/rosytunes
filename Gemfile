@@ -61,6 +61,7 @@ group :development, :test do
   # rubocop:enable Layout/LineLength
 
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "dotenv-rails"
 end
 
 group :development do
