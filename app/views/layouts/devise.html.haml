@@ -9,7 +9,11 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
     = javascript_importmap_tags
-  %body
+  %body{class: "w-screen flex justify-center content-center bg-white"}
     = render "layouts/notifications"
-    = render "layouts/header"
-    = yield
+    %main
+      .authorization_container{class: "m-8"}
+        .authorization_header{class: "flex justify-center p-4"}
+          = link_to (show_svg "logo.svg", %w{ fill-rose-700 h-[2rem] w-[10rem] }), root_path
+        .form_container{class: "bg-white text-black p-4"}
+          = yield
