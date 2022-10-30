@@ -51,7 +51,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "haml"
-gem "tailwindcss-rails"
+gem "tailwindcss-rails", "~> 2.0", "<= 2.0.14"
 
 gem "pg"
 
