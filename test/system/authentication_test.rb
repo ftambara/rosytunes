@@ -10,7 +10,7 @@ class AuthenticationTest < ApplicationSystemTestCase
     fill_in "user_password", with: "wisecracker"
     fill_in "user_password_confirmation", with: "wisecracker"
     click_on "Sign up"
-    
+
     assert_in_home_page
   end
 
@@ -26,7 +26,7 @@ class AuthenticationTest < ApplicationSystemTestCase
     assert_in_home_page
 
     click_on "Sign out"
-    
+
     assert_in_home_page
   end
 

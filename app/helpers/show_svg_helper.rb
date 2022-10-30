@@ -1,5 +1,5 @@
 module ShowSvgHelper
-  def show_svg(path, classes="")
+  def show_svg(path, classes = "")
     content = File.open("app/assets/images/#{path}", "rb") do |file|
       content = file.read
       unless classes.empty?
