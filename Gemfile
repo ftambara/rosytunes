@@ -55,6 +55,8 @@ gem "tailwindcss-rails"
 
 gem "pg"
 
+gem "devise"
+
 group :development, :test do
   # rubocop:disable Layout/LineLength
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

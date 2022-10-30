@@ -9,11 +9,12 @@
         = link_to (show_svg "github.svg", "fill-white h-6"),
           "https://github.com/ftambara/rosytunes", class: "inline"
       .user{class: "object-center"}
-        - if @user
+        - if user_signed_in?
           .user_nav{class:"flex gap-4 items-center"}
             .profile
-              = button_to "#{@user.name}'s profile", "#", class: "btn-primary"
-            = button_to "Log Out", "#", class: "btn-secondary"
+              = button_to "#{current_user.name}'s profile", "#", class: "btn-primary"
+            = button_to "Sign out", destroy_user_session_path, class: "btn-secondary", method: :delete
         - else
           .guest_nav
-            = button_to "Log In", "#", class: "btn-primary"
+            = link_to "Sign in", new_user_session_path, class: "btn-primary"
+            = link_to "Sign up", new_user_registration_path, class: "btn-primary"
