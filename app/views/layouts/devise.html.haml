@@ -1,0 +1,21 @@
+!!! 5
+%html
+  %head
+    %title Rosytunes
+    %meta{name: "viewport", content: "width=device-width,initial-scale=1"}
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+  %body{class: "w-screen bg-white"}
+    = render "layouts/notifications"
+    %main.container{class: "mx-auto p-8 w-max max-w-full flex flex-col justify-center items-center text-black"}
+      %header{class: "flex justify-center p-4"}
+        = link_to (show_svg "logo.svg", %w{ fill-rose-700 h-[2.5rem] w-[12.5rem] }), root_path
+      .form_container{class: "flex flex-col items-center"}
+        = yield :form_header
+        .form{class: "w-full p-4 mt-4 mb-8 border-2 border-rose-700 rounded-lg"}
+          = yield
+        = render "devise/shared/links"

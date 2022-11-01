@@ -1,17 +1,25 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f|
-  .field
+- content_for :form_header do
+  %h2 Welcome back!
+= form_for( resource,
+            as: resource_name,
+            url: session_path(resource_name),
+            data: { turbo: false },
+            html: { class: "flex flex-col gap-5 items-center" }) do |f|
+
+  .field{class: "flex flex-col"}
     = f.label :email
-    %br/
     = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
+
+  .field{class: "flex flex-col"}
     = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
+    = f.password_field :password, autocomplete: "current-password", class: ""
+    = link_to "Forgot password?", new_password_path(resource_name),
+      class: "btn-text-clear"
+
   - if devise_mapping.rememberable?
     .field
       = f.check_box :remember_me
       = f.label :remember_me
+
   .actions
-    = f.submit "Sign in"
-= render "devise/shared/links"
+    = f.submit "Sign in", class: "btn-color mx-auto"
