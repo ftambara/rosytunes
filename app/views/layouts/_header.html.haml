@@ -8,7 +8,7 @@
       .feedback
         = link_to (show_svg "github.svg", %w{ fill-white h-6 }),
           "https://github.com/ftambara/rosytunes", class: "inline"
-      .user
+      .user{class: ""}
         - if user_signed_in?
           .user_nav{class:"flex gap-8 items-center"}
             .profile
