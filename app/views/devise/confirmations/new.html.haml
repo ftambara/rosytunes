@@ -1,11 +1,17 @@
 - content_for :form_header do
   %h2 Resend confirmation instructions
-= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, data: { turbo: false } }) do |f|
+= form_for( resource,
+            as: resource_name,
+            url: confirmation_path(resource_name),
+            html: { method: :post,
+                    data: { turbo: false },
+                    class: "flex flex-col gap-5 items-center" }) do |f|
+
   = render "devise/shared/error_messages", resource: resource
-  .field
+
+  .field{class: "flex flex-col"}
     = f.label :email
-    %br/
     = f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+
   .actions
-    = f.submit "Resend confirmation instructions"
-= render "devise/shared/links"
+    = f.submit "Resend confirmation instructions", class: "btn-color"
