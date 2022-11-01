@@ -1,4 +1,5 @@
-%h2 Log in
+- content_for :form_header do
+  %h2 Welcome back!
 = form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f|
   .field
     = f.label :email
