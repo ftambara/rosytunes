@@ -1,5 +1,5 @@
 %header
-  %nav.navbar{class: "w-full py-3 px-4 flex flex-wrap gap-4 justify-between
+  %nav.navbar{class: "w-full py-2 px-4 flex flex-wrap gap-8 justify-between
   items-center bg-rose-700 text-white"}
     .logo
       = link_to (show_svg "logo.svg", %w{ fill-white h-[1.5rem] w-[7.5rem] }),
@@ -8,13 +8,13 @@
       .feedback
         = link_to (show_svg "github.svg", %w{ fill-white h-6 }),
           "https://github.com/ftambara/rosytunes", class: "inline"
-      .user{class: "object-center"}
+      .user
         - if user_signed_in?
-          .user_nav{class:"flex gap-4 items-center"}
+          .user_nav{class:"flex gap-8 items-center"}
             .profile
               = button_to "#{current_user.name}'s profile", "#", class: "btn-clear"
             = button_to "Sign out", destroy_user_session_path, class: "btn-color", method: :delete
         - else
-          .guest_nav
+          .guest_nav{class:"flex gap-8 items-center"}
             = link_to "Sign in", new_user_session_path, class: "btn-clear"
             = link_to "Sign up", new_user_registration_path, class: "btn-clear"
