@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mbid: 6be1cc0e-76f1-47c4-99a3-c97a1ec8095c
+  name: MyString
+  length_in_s: 180
+
+two:
+  mbid: 7b9b36c5-d30a-48e5-a2cb-94b1eeac9551
+  name: MyString
+  length_in_s: 180
