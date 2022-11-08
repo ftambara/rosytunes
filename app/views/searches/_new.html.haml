@@ -1,7 +1,7 @@
-= form_with url: search_path, method: :get, id: "search" do |form|
+= form_with url: search_path, method: :get, scope: "search" do |form|
   .field
   = form.label :entity
-  = form.collection_select :entity, all_entities.keys, :to_s, :to_s #, include_blank: false
+  = form.collection_select :entity, searchable_entities.keys, :to_s, :to_s #, include_blank: false
 
   .field
   = form.label :query

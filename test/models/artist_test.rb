@@ -28,4 +28,8 @@ class ArtistTest < ActiveSupport::TestCase
   test "an artist can multiple albums" do
     can_have_many_test(@artist, :albums, [albums(:one), albums(:two)])
   end
+
+  test "it knows its MB adapter" do
+    assert_equal MbAdapter, Artist.mb_adapter.superclass
+  end
 end

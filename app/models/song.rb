@@ -1,6 +1,6 @@
 class Song < ApplicationRecord
   validates :name, presence: true
-  validates :mbid, 
+  validates :mbid,
     presence: true,
     uniqueness: true
 

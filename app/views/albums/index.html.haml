@@ -1,0 +1,4 @@
+.section
+  = @albums.each do |album|
+    %article.album_card
+      %a= render "card", album:
