@@ -20,8 +20,4 @@ class AlbumValidationTest < ActiveSupport::TestCase
   test "name cannot be empty" do
     attribute_not_empty_test(@album, :name)
   end
-
-  test "release_type cannot be empty" do
-    attribute_not_empty_test(@album, :release_type)
-  end
 end

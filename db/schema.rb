@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_08_212132) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_09_174943) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "albums", force: :cascade do |t|
     t.uuid "mbid", null: false
     t.string "name", null: false
-    t.integer "release_type", null: false
+    t.integer "release_type"
     t.date "release_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

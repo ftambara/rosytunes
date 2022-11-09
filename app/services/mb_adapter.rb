@@ -38,7 +38,9 @@ class MbAdapter
 
 
     def models_from_entities(entities_list)
-      entities_list.map { |entity| entity_to_model(entity) }
+      entities_list
+        .map { |entity| entity_to_model(entity) }
+        .filter { |e| e.valid? }
     end
 
     private
@@ -49,8 +51,7 @@ class MbAdapter
             attr_map[attr] = value
           end
         end
-        model.new(**attr_map)
+        model.find_by(mbid: attr_map[:mbid]) || model.create(**attr_map)
       end
   end
 end
-

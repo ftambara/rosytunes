@@ -6,7 +6,7 @@ class MusicLibraryGatewayTest < ActiveSupport::TestCase
   include WithVCR
 
   setup do
-    @gateway = MusicLibraryGateway
+    @gateway = MusicLibraryGateway.new
   end
 
   test "it searches for an album" do

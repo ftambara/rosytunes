@@ -36,8 +36,4 @@ class SongTest < ActiveSupport::TestCase
   test "a song can feature multiple artists" do
     can_have_many_test(@song, :artists, [artists(:one), artists(:two)])
   end
-
-  test "it knows its MB adapter" do
-    assert_equal MbAdapter, Song.mb_adapter.superclass
-  end
 end
