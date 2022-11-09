@@ -10,12 +10,12 @@ class Album < ApplicationRecord
 
   has_and_belongs_to_many :artists
 
-  def self.search(query)
-    gateway.list_of(mb_adapter, matching: query)
+  class << self
+    include CanAccessLibrary
+
+    def mb_adapter = MbAlbumAdapter
+
+    private
+      def gateway = MusicLibraryGateway.new
   end
-
-  def self.mb_adapter = MbAlbumAdapter
-
-  private
-    def self.gateway = MusicLibraryGateway.new
 end

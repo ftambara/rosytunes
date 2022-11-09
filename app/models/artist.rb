@@ -6,5 +6,12 @@ class Artist < ApplicationRecord
 
   has_and_belongs_to_many :albums
 
-  def self.mb_adapter = MbArtistAdapter
+  class << self
+    include CanAccessLibrary
+
+    def mb_adapter = MbArtistAdapter
+
+    private
+      def gateway = MusicLibraryGateway.new
+  end
 end
