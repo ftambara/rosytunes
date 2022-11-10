@@ -1,4 +1,3 @@
-.section
-  = @albums.each do |album|
-    %article.album_card
-      %a= render "card", album:
+.section{class: "flex flex-wrap gap-4 p-8"}
+  - @albums.each do |album|
+    = render "card", album:

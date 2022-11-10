@@ -9,6 +9,7 @@ class Album < ApplicationRecord
   validates :name, presence: true
 
   has_and_belongs_to_many :artists
+  has_and_belongs_to_many :songs
 
   class << self
     include CanAccessLibrary

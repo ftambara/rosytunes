@@ -6,4 +6,8 @@ class AlbumsController < ApplicationController
                 Album.order(:release_date)
               end
   end
+
+  def show
+    @album = Album.includes(:artists, :songs).find(params[:id])
+  end
 end

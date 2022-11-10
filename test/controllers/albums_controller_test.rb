@@ -10,4 +10,9 @@ class AlbumsControllerTest < ActionDispatch::IntegrationTest
     get albums_path(query: "Appetite For Destruction")
     assert_response :success
   end
+
+  test "should show album details" do
+    get album_path(albums(:one))
+    assert_response :success
+  end
 end
