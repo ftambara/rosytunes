@@ -11,7 +11,7 @@ class AlbumAssociationTest < ActiveSupport::TestCase
     can_have_one_test(@album, :artists, artists(:one))
   end
 
-  test "an album can multiple artists" do
+  test "an album can have multiple artists" do
     can_have_many_test(@album, :artists, [artists(:one), artists(:two)])
   end
 
