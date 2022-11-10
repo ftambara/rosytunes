@@ -2,9 +2,9 @@ class MbAlbumAdapter < MbAdapter
   class << self
     def entity_name = "release-group"
 
-    private
-      def model = Album
+    def model = Album
 
+    private
       def mappings
         {
           mbid: Value.new("id"),

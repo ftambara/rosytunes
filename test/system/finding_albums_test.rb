@@ -7,13 +7,10 @@ class FindingAlbumsTest < ApplicationSystemTestCase
     sign_in(users(:one))
     visit root_path
 
-    click_on "Search"
-    click_on "Albums"
-    fill_in ".searchbox", with: "Appetite for Destruction"
+    select "Albums", from: "Entity"
+    fill_in "Query", with: "Appetite For Destruction"
     click_on "Search"
 
-    find(".album").find(".artist", text: "Guns N' Roses").click_link
-
-    assert_select(".h2", text: "Guns N' Roses")
+    find(".album_card", match: :first).click_link
   end
 end

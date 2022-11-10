@@ -1,7 +1,9 @@
 class AlbumsController < ApplicationController
   def index
-    if (query = params[:query])
-      @albums = Album.search(query:)
-    end
+    @albums = if (query = params[:query])
+                Album.search(query)
+              else
+                Album.order(:release_date)
+              end
   end
 end

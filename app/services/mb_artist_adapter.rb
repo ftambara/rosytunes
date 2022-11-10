@@ -2,9 +2,9 @@ class MbArtistAdapter < MbAdapter
   class << self
     def entity_name = "artist"
 
-    private
-      def model = Artist
+    def model = Artist
 
+    private
       def mappings
         {
           mbid: Value.new("id"),
