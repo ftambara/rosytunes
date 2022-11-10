@@ -1,8 +1,6 @@
 require "test_helper"
 
 class AlbumMethodsTest < ActiveSupport::TestCase
-  include WithVCR
-
   test "it knows its MB adapter" do
     assert_equal MbAdapter, Album.mb_adapter.superclass
   end
@@ -25,9 +23,7 @@ class AlbumMethodsTest < ActiveSupport::TestCase
 
   test "it persists searches" do
     initial_count = Album.count
-    collection = with_expiring_vcr_cassette(name: "album_search") do
-      Album.search("Appetite For Destruction")
-    end
+    collection = Album.search("Appetite For Destruction")
     assert_operator initial_count, :<, collection.size
   end
 end

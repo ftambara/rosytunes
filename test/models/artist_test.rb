@@ -2,7 +2,6 @@ require "test_helper"
 
 class ArtistTest < ActiveSupport::TestCase
   include CommonTests::Model
-  include WithVCR
 
   setup do
     @artist = artists(:one)
@@ -52,9 +51,7 @@ class ArtistTest < ActiveSupport::TestCase
 
   test "it persists searches" do
     initial_count = Artist.count
-    collection = with_expiring_vcr_cassette(name: "artist_search") do
-      Artist.search("Guns N' Roses")
-    end
+    collection = Artist.search("Guns N' Roses")
     assert_operator initial_count, :<, collection.size
   end
 end

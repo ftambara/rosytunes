@@ -3,16 +3,13 @@ require "test_helper"
 class MusicLibraryGatewayTest < ActiveSupport::TestCase
   # TODO make this tests run only when explicitly told,
   # since they interact with an external API
-  include WithVCR
-
   setup do
     @gateway = MusicLibraryGateway.new
   end
 
   test "it searches for an album" do
-    collection = with_expiring_vcr_cassette(name: "album_search") do
-      @gateway.list_of Album.mb_adapter, matching: "Appetite For Destruction"
-    end
+    collection = @gateway.list_of Album.mb_adapter,
+      matching: "Appetite For Destruction"
     assert_not collection.empty?
 
     attributes = [:mbid, :name, :artists]
@@ -22,9 +19,8 @@ class MusicLibraryGatewayTest < ActiveSupport::TestCase
   end
 
   test "it searches for an artist" do
-    collection = with_expiring_vcr_cassette(name: "artist_search") do
-      @gateway.list_of Artist.mb_adapter, matching: "Guns N' Roses"
-    end
+    collection = @gateway.list_of Artist.mb_adapter,
+      matching: "Guns N' Roses"
     assert_not collection.empty?
 
     attributes = [:mbid, :name]

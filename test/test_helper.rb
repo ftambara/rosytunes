@@ -72,3 +72,15 @@ module WithVCR
       raise
     end
 end
+
+class MusicLibraryGateway
+  include WithVCR
+
+  alias old_list_of list_of
+  def list_of(mappable, matching:)
+    name = mappable.model.name.downcase + "_record"
+    with_expiring_vcr_cassette(name:) do
+      old_list_of(mappable, matching:)
+    end
+  end
+end
