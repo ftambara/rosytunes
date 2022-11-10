@@ -6,6 +6,6 @@ module SearchHelper
   end
 
   def searchable_entities
-    { "Album" => Album, "Artist" => Artist }
+    { "Albums" => Album, "Artists" => Artist }
   end
 end
