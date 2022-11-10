@@ -1,6 +1,7 @@
-%article.album_card{class: "p-4 border-2 border-rose-700 rounded w-48 h-72"}
-  %a{href: album_path(album)}
-    %h2.name= album.name
+%a{href: album_path(album)}
+  %article.album_card{class: "p-4 bg-rose-200 rounded w-56 h-36"}
+    %h2.name{class: "font-bold text-rose-700"}
+      = album.name
     %ul.artists
       - album.artists.each do |artist|
         %li.artist_name= artist.name
