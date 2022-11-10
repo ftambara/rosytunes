@@ -8,12 +8,15 @@ class SearchesController < ApplicationController
       render :new, errors:
         "Entity must be one of [#{helpers.searchable_entities.join(", ")}]"
     end
-    entity_index_helper = "#{entity.downcase.pluralize}_path"
-    redirect_to send(entity_index_helper, params: { query: })
+    redirect_to send(delegate_url_helper(entity), params: { query: })
   end
 
   private
     def search_params
       params.require(:search).permit(:entity, :query)
+    end
+
+    def delegate_url_helper(entity)
+      "#{entity.downcase.pluralize}_path"
     end
 end
