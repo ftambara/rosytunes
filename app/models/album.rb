@@ -15,8 +15,5 @@ class Album < ApplicationRecord
     include CanAccessLibrary
 
     def mb_adapter = MbAlbumAdapter
-
-    private
-      def gateway = MusicLibraryGateway.new
   end
 end

@@ -8,7 +8,5 @@ module CanAccessLibrary
   end
 
   private
-    def gateway
-      raise NotImplementedError
-    end
+    def gateway = MusicLibraryGateway.new
 end
