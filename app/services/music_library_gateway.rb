@@ -1,14 +1,14 @@
 class MusicLibraryGateway
-  def list_of(mappable, matching:)
-    # matching: query string
-    return [] if matching.blank?
-    entities_list = client.search(mappable, query: matching)
-    mappable.models_from_entities(entities_list)
+  def list_of(model_class, query)
+    return [] if query.nil? || query.blank?
+    mapper = model_class.api_mapper
+    results = mapper.api_class.search(query)
+    results.map { |result| mapper.api_to_app_model(result) }
   end
 
-  def fill_details(model_class)
+  def find(model)
+    mapper = model.class.api_mapper
+    result = mapper.api_class.find(model.api_id)
+    mapper.api_values_into_model(result, model)
   end
-
-  private
-    def client = MusicbrainzApiClient
 end

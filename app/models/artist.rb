@@ -1,14 +1,10 @@
 class Artist < ApplicationRecord
-  validates :name, presence: true
-  validates :mbid,
+  include CanAccessLibrary
+
+  validates :name, presence: true # BUG, make it appear on tests
+  validates :api_id,
     presence: true,
     uniqueness: true
 
-  has_and_belongs_to_many :albums
-
-  class << self
-    include CanAccessLibrary
-
-    def mb_adapter = MbArtistAdapter
-  end
+  attr_accessor :name
 end

@@ -1,19 +1,12 @@
 class Album < ApplicationRecord
+  include CanAccessLibrary
+
   enum :release_type, { "Album"       => 0,
-                        "EP"          => 1,
-                        "Compilation" => 2,
-                        "Live"        => 3 }
-  validates :mbid,
+                        "Single"      => 1,
+                        "Compilation" => 2 }
+  validates :api_id,
     presence: true,
     uniqueness: true
-  validates :name, presence: true
 
-  has_and_belongs_to_many :artists
-  has_and_belongs_to_many :songs
-
-  class << self
-    include CanAccessLibrary
-
-    def mb_adapter = MbAlbumAdapter
-  end
+  lib_attr_accessor :name, :release_type, :release_date, :artists, :songs
 end

@@ -57,7 +57,7 @@ gem "pg"
 
 gem "devise"
 
-gem "rest-client"
+gem "rspotify"
 
 group :development, :test do
   # rubocop:disable Layout/LineLength

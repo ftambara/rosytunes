@@ -8,48 +8,62 @@ class MusicLibraryGatewayTest < ActiveSupport::TestCase
   end
 
   test "it searches for an album" do
-    collection = @gateway.list_of Album.mb_adapter,
-      matching: "Appetite For Destruction"
-    assert_not collection.empty?
+    albums = VCR.use_cassette("album:search:ride_the_lightning") do
+      @gateway.list_of(Album, "Ride The Lightning")
+    end
+    assert_not albums.empty?
 
-    attributes = [:mbid, :name, :artists]
-    collection.each do |album|
+    attributes = [:api_id, :name, :artists]
+    albums.each do |album|
       attributes_are_not_empty_test(album, attributes)
     end
   end
 
   test "it searches for an artist" do
-    collection = @gateway.list_of Artist.mb_adapter,
-      matching: "Guns N' Roses"
-    assert_not collection.empty?
+    artists = VCR.use_cassette("artist:search:metallica") do
+      @gateway.list_of(Album, "Metallica")
+    end
+    assert_not artists.empty?
 
-    attributes = [:mbid, :name]
-    collection.each do |album|
-      attributes_are_not_empty_test(album, attributes)
+    attributes = [:api_id, :name]
+    artists.each do |artist|
+      attributes_are_not_empty_test(artist, attributes)
     end
   end
 
   test "search results are empty when query is blank" do
-    collection = @gateway.list_of Artist.mb_adapter, matching: ""
-    assert collection.empty?
+    albums_empty = VCR.use_cassette("artist:search:empty") do
+      @gateway.list_of Artist, ""
+    end
 
-    collection = @gateway.list_of Artist.mb_adapter, matching: " "
-    assert collection.empty?
+    albums_whitespace = VCR.use_cassette("artist:search:whitespace") do
+      @gateway.list_of(Album, " ")
+    end
+
+    assert albums_empty.empty?
+    assert albums_whitespace.empty?
   end
 
   test "searching with an invalid model_class raises an error" do
     assert_raises do
-      collection = @gateway.list_of "", matching: "query"
+      VCR.use_cassette("empty:search:query") do
+        @gateway.list_of "", "query"
+      end
     end
   end
 
-  test "it gets details for the given model" do
+  test "it finds an album" do
+    model = VCR.use_cassette("album:appetite_for_destruction") do
+      @gateway.find(albums(:appetite_for_destruction))
+    end
+    assert_kind_of Album, model
   end
 
   test "it fails to get details for an unknown model" do
   end
 
   test "it places a limit on API-call frequency" do
+    skip
   end
 
   private

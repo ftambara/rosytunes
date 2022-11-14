@@ -18,5 +18,7 @@ module Rosytunes
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    RSpotify.authenticate(ENV["SPOTIFY_CLIENT_ID"],
+                           ENV["SPOTIFY_CLIENT_SECRET"])
   end
 end

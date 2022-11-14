@@ -4,20 +4,24 @@ class AlbumValidationTest < ActiveSupport::TestCase
   include CommonTests::Model
 
   setup do
-    @album = albums(:one).dup
+    @album = VCR.use_cassette("album:find:appetite_for_destruction") do
+      albums(:appetite_for_destruction)
+    end
   end
 
-  test "MBID cannot be empty" do
-    attribute_not_empty_test(@album, :mbid)
+  test "an album can be valid" do
+    assert @album.valid?
   end
 
-  test "MBID must be unique" do
-    album = albums(:two)
-    album.mbid = @album.mbid
-    assert_not album.valid?
+  test "API ID must be present" do
+    @album.api_id = nil
+    @album.valid?
+    assert_not_empty @album.errors.full_messages
   end
 
-  test "name cannot be empty" do
-    attribute_not_empty_test(@album, :name)
+  test "API ID must be unique" do
+    duplicated_album = Album.new(api_id: @album.api_id)
+    duplicated_album.valid?
+    assert_not_empty duplicated_album.errors.full_messages
   end
 end

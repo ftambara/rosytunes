@@ -1,13 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  mbid: ec679df8-0d85-4468-aba4-bfdbb947162f
-  name: MyString
-  release_type: Album
-  release_date: '2022-11-06'
+appetite_for_destruction:
+  api_id: 28yHV3Gdg30AiB8h8em1eW
 
 two:
-  mbid: 299b5ef7-2d4e-4428-83f5-594ac528bd04
-  name: MyString
-  release_type: Compilation
-  release_date: '2022-11-06'
+  api_id: i0lSsFNb16S8XlIysZMMGC

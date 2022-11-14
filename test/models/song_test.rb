@@ -7,13 +7,13 @@ class SongTest < ActiveSupport::TestCase
     @song = songs(:one)
   end
 
-  test "MBID cannot be empty" do
-    attribute_not_empty_test(@song, :mbid)
+  test "API ID cannot be empty" do
+    attribute_not_empty_test(@song, :api_id)
   end
 
-  test "MBID must be unique" do
+  test "API ID must be unique" do
     song = songs(:two)
-    song.mbid = @song.mbid
+    song.api_id = @song.api_id
     assert_not song.valid?
   end
 

@@ -7,13 +7,13 @@ class ArtistTest < ActiveSupport::TestCase
     @artist = artists(:one)
   end
 
-  test "MBID cannot be empty" do
-    attribute_not_empty_test(@artist, :mbid)
+  test "API ID cannot be empty" do
+    attribute_not_empty_test(@artist, :api_id)
   end
 
-  test "MBID must be unique" do
+  test "API ID must be unique" do
     artist = artists(:two)
-    artist.mbid = @artist.mbid
+    artist.api_id = @artist.api_id
     assert_not artist.valid?
   end
 
@@ -29,18 +29,16 @@ class ArtistTest < ActiveSupport::TestCase
     can_have_many_test(@artist, :albums, [albums(:one), albums(:two)])
   end
 
-  test "it knows its MB adapter" do
-    assert_equal MbAdapter, Artist.mb_adapter.superclass
+  test "it knows its API mapper" do
+    assert_equal ApiMapper::Base, Artist.api_mapper.superclass
   end
 
   test "it delegates search to gateway" do
-    model = Artist
     query = "Guns N' Roses"
 
     gateway = Minitest::Mock.new
-    gateway.expect(:list_of, true) do |adapter, matching:|
-      assert_equal [adapter, matching], [model.mb_adapter, query]
-      true
+    gateway.expect(:list_of, true) do |klass, string|
+      [Artist, query] == [klass, string]
     end
     MusicLibraryGateway.stub :new, gateway do
       Artist.search(query)

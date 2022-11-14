@@ -16,9 +16,12 @@ end
 
 module CommonTests
   module Model
+    def attribute_not_nil_test(model, attribute)
+      assert_not_nil model.send(attribute)
+    end
+
     def attribute_not_empty_test(model, attribute)
-      model.send("#{attribute}=", "")
-      assert_not model.valid?
+      assert_not_empty model.send(attribute)
     end
 
     def can_have_one_test(model, collection, related_model)
@@ -26,8 +29,8 @@ module CommonTests
     end
 
     def can_have_many_test(model, collection, related_models)
-      related_models.each do |rm|
-        model.send(collection) << rm
+      related_models.each do |related_model|
+        model.send(collection) << related_model
       end
       assert_equal related_models.length, model.send(collection).count
     end
@@ -35,52 +38,6 @@ module CommonTests
 end
 
 VCR.configure do |config|
-  config.allow_http_connections_when_no_cassette = true
   config.cassette_library_dir = "test/cassettes"
   config.hook_into :webmock
-end
-
-# https://gist.github.com/mattbrictson/72910465f36be8319cde?permalink_comment_id=3769898#gistcomment-3769898
-module WithVCR
-  private
-    def with_expiring_vcr_cassette(name: nil, &block)
-      cassette_path = (name) ? name : _name_from_class_name(self.class.name)
-      VCR.use_cassette(cassette_path) do |cassette|
-        _remove_if_stale(cassette.file)
-        _yield_and_clean_if_error(cassette, &block)
-      end
-    end
-
-    def _name_from_class(class_name)
-      names = class_name.split("::")
-      cassette_path = names.map do |s|
-        s.gsub(/[^A-Z0-9]+/i, "_")
-      end.join("/")
-    end
-
-    def _remove_if_stale(file)
-      if File.exist?(file)
-        age = Time.current - File.mtime(file)
-        FileUtils.rm(file) if age > 60 * 60 * 24 * 30
-      end
-    end
-
-    def _yield_and_clean_if_error(cassette)
-      yield(cassette)
-    rescue StandardError
-      FileUtils.rm(cassette.file) if File.exist?(cassette.file)
-      raise
-    end
-end
-
-class MusicLibraryGateway
-  include WithVCR
-
-  alias old_list_of list_of
-  def list_of(mappable, matching:)
-    name = mappable.model.name.downcase + "_record"
-    with_expiring_vcr_cassette(name:) do
-      old_list_of(mappable, matching:)
-    end
-  end
 end

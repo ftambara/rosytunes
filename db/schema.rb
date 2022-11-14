@@ -10,18 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_09_174943) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_13_101900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "albums", force: :cascade do |t|
-    t.uuid "mbid", null: false
-    t.string "name", null: false
-    t.integer "release_type"
-    t.date "release_date"
+    t.string "api_id", limit: 30, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mbid"], name: "index_albums_on_mbid", unique: true
+    t.index ["api_id"], name: "index_albums_on_api_id", unique: true
   end
 
   create_table "albums_artists", id: false, force: :cascade do |t|
@@ -37,11 +34,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_174943) do
   end
 
   create_table "artists", force: :cascade do |t|
-    t.uuid "mbid", null: false
-    t.string "name", null: false
+    t.string "api_id", limit: 30, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mbid"], name: "index_artists_on_mbid", unique: true
+    t.index ["api_id"], name: "index_artists_on_api_id", unique: true
   end
 
   create_table "artists_songs", id: false, force: :cascade do |t|
@@ -50,20 +46,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_174943) do
     t.index ["artist_id", "song_id"], name: "index_artists_songs_on_artist_id_and_song_id"
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.string "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "songs", force: :cascade do |t|
-    t.uuid "mbid", null: false
-    t.string "name", null: false
-    t.integer "length_in_s"
+    t.string "api_id", limit: 30, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mbid"], name: "index_songs_on_mbid", unique: true
+    t.index ["api_id"], name: "index_songs_on_api_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
