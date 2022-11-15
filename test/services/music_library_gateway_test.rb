@@ -6,7 +6,7 @@ class MusicLibraryGatewayTest < ActiveSupport::TestCase
   end
 
   test "it searches for an album" do
-    albums = VCR.use_cassette("album:search:ride_the_lightning") do
+    albums = VCR.use_cassette("album:search:ride_the_lightning:not_shallow") do
       @gateway.list_of(Album, "Ride The Lightning", shallow: false)
     end
     assert_not albums.empty?
