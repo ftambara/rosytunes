@@ -30,23 +30,16 @@ class MusicLibraryGatewayTest < ActiveSupport::TestCase
   end
 
   test "search results are empty when query is blank" do
-    albums_empty = VCR.use_cassette("artist:search:empty") do
-      @gateway.list_of Artist, ""
-    end
-
-    albums_whitespace = VCR.use_cassette("artist:search:whitespace") do
-      @gateway.list_of(Album, " ")
-    end
-
+    albums_empty = @gateway.list_of(Artist, "")
     assert albums_empty.empty?
+
+    albums_whitespace = @gateway.list_of(Album, " ")
     assert albums_whitespace.empty?
   end
 
   test "searching with an invalid model_class raises an error" do
     assert_raises do
-      VCR.use_cassette("empty:search:query") do
-        @gateway.list_of "", "query"
-      end
+      @gateway.list_of("", "query")
     end
   end
 
@@ -55,10 +48,6 @@ class MusicLibraryGatewayTest < ActiveSupport::TestCase
       @gateway.find(albums(:appetite_for_destruction))
     end
     assert_kind_of Album, model
-  end
-
-  test "it fails to get details for an unknown model" do
-    skip
   end
 
   test "it places a limit on API-call frequency" do
