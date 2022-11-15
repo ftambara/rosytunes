@@ -14,6 +14,11 @@ module ApiMapper
         app_model.artists = artists.map do |artist|
           ApiMapper::Artist.api_to_app_model(artist, shallow: true)
         end
+
+        songs = get_full_collection(api_model, :tracks)
+        app_model.songs = songs.map do |song|
+          ApiMapper::Song.api_to_app_model(song, shallow: true)
+        end
       end
 
       def convert_album_type(api_album_type)

@@ -1,9 +1,11 @@
 module ApiMapper
   class Base
     class << self
-      def api_to_app_model(api_model, shallow: false)
+      def api_to_app_model(api_model, persist: true, shallow: false)
         api_id = api_model.id
-        app_model = target_model_class.find_or_initialize_by(api_id:)
+        app_model = persist ?
+          target_model_class.find_or_create_by(api_id:) :
+          target_model_class.find_or_initialize_by(api_id:)
         transfer_into_model(api_model, app_model, shallow:)
         app_model
       end

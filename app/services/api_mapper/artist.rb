@@ -10,7 +10,6 @@ module ApiMapper
       def fill_collections(api_model, app_model)
         albums = get_full_collection(
           api_model, :albums, filters: { album_type: "album" })
-        counter = 0
         app_model.albums = albums.map do |album|
           ApiMapper::Album.api_to_app_model(album, shallow: true)
         end

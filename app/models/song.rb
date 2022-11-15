@@ -1,6 +1,7 @@
 class Song < ApplicationRecord
-  validates :name, presence: true
   validates :api_id,
     presence: true,
     uniqueness: true
+
+  attr_accessor :name, :length_in_s
 end

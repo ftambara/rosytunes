@@ -1,8 +1,6 @@
 require "test_helper"
 
 class MusicLibraryGatewayTest < ActiveSupport::TestCase
-  # TODO make this tests run only when explicitly told,
-  # since they interact with an external API
   setup do
     @gateway = MusicLibraryGateway.new
   end

@@ -21,8 +21,7 @@ module CanAccessLibrary
     end
 
     def search(query, persist: true)
-      collection = gateway.list_of(self, query)
-      collection.each { |model| model.save } if persist
+      collection = gateway.list_of(self, query, persist:)
     end
 
     def api_mapper = ApiMapper.const_get(self.name)
