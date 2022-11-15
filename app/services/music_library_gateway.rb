@@ -1,9 +1,9 @@
 class MusicLibraryGateway
-  def list_of(model_class, query, persist: true)
+  def list_of(model_class, query, persist: true, shallow: true)
     return [] if query.nil? || query.blank?
     mapper = model_class.api_mapper
     results = mapper.api_class.search(query)
-    results.map { |result| mapper.api_to_app_model(result, persist:) }
+    results.map { |result| mapper.api_to_app_model(result, persist:, shallow:) }
   end
 
   def find(model)

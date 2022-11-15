@@ -1,7 +1,7 @@
 module ApiMapper
   class Base
     class << self
-      def api_to_app_model(api_model, persist: true, shallow: false)
+      def api_to_app_model(api_model, persist: true, shallow: true)
         api_id = api_model.id
         app_model = persist ?
           target_model_class.find_or_create_by(api_id:) :

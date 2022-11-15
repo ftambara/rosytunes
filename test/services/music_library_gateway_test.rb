@@ -7,11 +7,11 @@ class MusicLibraryGatewayTest < ActiveSupport::TestCase
 
   test "it searches for an album" do
     albums = VCR.use_cassette("album:search:ride_the_lightning") do
-      @gateway.list_of(Album, "Ride The Lightning")
+      @gateway.list_of(Album, "Ride The Lightning", shallow: false)
     end
     assert_not albums.empty?
 
-    attributes = [:api_id, :name, :artists]
+    attributes = [:api_id, :name, :artists, :songs]
     albums.each do |album|
       attributes_are_not_empty_test(album, attributes)
     end
