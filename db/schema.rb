@@ -10,15 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_28_194757) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_13_101900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.string "content"
+  create_table "albums", force: :cascade do |t|
+    t.string "api_id", limit: 30, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["api_id"], name: "index_albums_on_api_id", unique: true
+  end
+
+  create_table "albums_artists", id: false, force: :cascade do |t|
+    t.bigint "album_id", null: false
+    t.bigint "artist_id", null: false
+    t.index ["album_id", "artist_id"], name: "index_albums_artists_on_album_id_and_artist_id", unique: true
+  end
+
+  create_table "albums_songs", id: false, force: :cascade do |t|
+    t.bigint "album_id", null: false
+    t.bigint "song_id", null: false
+    t.index ["album_id", "song_id"], name: "index_albums_songs_on_album_id_and_song_id"
+  end
+
+  create_table "artists", force: :cascade do |t|
+    t.string "api_id", limit: 30, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["api_id"], name: "index_artists_on_api_id", unique: true
+  end
+
+  create_table "artists_songs", id: false, force: :cascade do |t|
+    t.bigint "artist_id", null: false
+    t.bigint "song_id", null: false
+    t.index ["artist_id", "song_id"], name: "index_artists_songs_on_artist_id_and_song_id"
+  end
+
+  create_table "songs", force: :cascade do |t|
+    t.string "api_id", limit: 30, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["api_id"], name: "index_songs_on_api_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

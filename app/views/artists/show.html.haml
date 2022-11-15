@@ -1,0 +1,6 @@
+%article.artist
+  %h1.title= @artist.name
+  %h2.albums= "Album".pluralize(@artist.albums.count)
+  %ul.albums_list 
+    - @artist.albums.each do |album|
+      %li.album_name= album.name

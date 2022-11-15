@@ -57,6 +57,8 @@ gem "pg"
 
 gem "devise"
 
+gem "rspotify"
+
 group :development, :test do
   # rubocop:disable Layout/LineLength
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -88,4 +90,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "webmock"
+  gem "vcr"
 end
