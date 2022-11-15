@@ -1,7 +1,6 @@
 require "test_helper"
 
 class ArtistMethodsTest < ActiveSupport::TestCase
-
   test "it knows its API mapper" do
     assert_equal ApiMapper::Base, Artist.api_mapper.superclass
   end

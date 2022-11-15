@@ -28,7 +28,6 @@ module ApiMapper
         when "compilation" then "Compilation"
         end
       end
-
     end
   end
 end

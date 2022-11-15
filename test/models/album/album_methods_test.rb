@@ -1,7 +1,6 @@
 require "test_helper"
 
 class AlbumMethodsTest < ActiveSupport::TestCase
-
   test "it knows its API mapper" do
     assert_equal ApiMapper::Base, Album.api_mapper.superclass
   end

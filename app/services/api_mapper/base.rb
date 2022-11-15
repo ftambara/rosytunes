@@ -32,7 +32,6 @@ module ApiMapper
           end
           results
         end
-
     end
   end
 end

@@ -14,7 +14,6 @@ module ApiMapper
           ApiMapper::Album.api_to_app_model(album, shallow: true)
         end
       end
-
     end
   end
 end
