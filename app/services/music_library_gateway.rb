@@ -9,6 +9,6 @@ class MusicLibraryGateway
   def find(model)
     mapper = model.class.api_mapper
     result = mapper.api_class.find(model.api_id)
-    mapper.api_values_into_model(result, model)
+    mapper.transfer_into_model(result, model)
   end
 end

@@ -21,7 +21,7 @@ class MusicLibraryGatewayTest < ActiveSupport::TestCase
 
   test "it searches for an artist" do
     artists = VCR.use_cassette("artist:search:metallica") do
-      @gateway.list_of(Album, "Metallica")
+      @gateway.list_of(Artist, "Metallica")
     end
     assert_not artists.empty?
 
@@ -60,6 +60,7 @@ class MusicLibraryGatewayTest < ActiveSupport::TestCase
   end
 
   test "it fails to get details for an unknown model" do
+    skip
   end
 
   test "it places a limit on API-call frequency" do

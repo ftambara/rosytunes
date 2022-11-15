@@ -10,7 +10,8 @@ class AlbumValidationTest < ActiveSupport::TestCase
   end
 
   test "an album can be valid" do
-    assert @album.valid?
+    @album.valid?
+    assert_empty @album.errors.full_messages
   end
 
   test "API ID must be present" do

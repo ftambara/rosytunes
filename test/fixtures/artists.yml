@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  api_id: X0AhBTwCJrkIfpEdXrAb3TI
+guns_n_roses:
+  api_id: 3qm84nBOXUEQ2vnTfUTTFC
 
-two:
-  api_id: p7dLSzDOsEMabaoIgvquQKX
+the_rolling_stones:
+  api_id: 22bE4uQ6baNwSHPVcDxLCe

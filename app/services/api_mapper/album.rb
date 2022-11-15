@@ -3,35 +3,27 @@ module ApiMapper
     class << self
       def api_class = RSpotify::Album
 
-      ApiAttrMapping = Struct.new(:api_attr, :app_attr)
-      def api_attr_mappings
-        {
-        # API attr      App attr
-          id:           :api_id,
-          name:         :name,
-          release_date: :release_date,
-          album_type:   :release_type,
-          artists:      :artists
-        }
+      def fill_flat_attributes(api_model, app_model)
+        app_model.name         = api_model.name
+        app_model.release_date = api_model.release_date
+        app_model.release_type = convert_album_type(api_model.album_type)
       end
 
-      def api_value_mappings
-        {
-        # API attr    API value to app mapping function
-          album_type: ->(value) do
-            case value
-            when "album"       then "Album"
-            when "single"      then "Single"
-            when "compilation" then "Compilation"
-            end
-          end,
-          artists: ->(value) do
-            value.map do |artist|
-              ::Artist.api_mapper.api_to_app_model(artist)
-            end
-          end
-        }
+      def fill_collections(api_model, app_model)
+        artists = get_full_collection(api_model, :artists)
+        app_model.artists = artists.map do |artist|
+          ApiMapper::Artist.api_to_app_model(artist, shallow: true)
+        end
       end
+
+      def convert_album_type(api_album_type)
+        case api_album_type
+        when "album"       then "Album"
+        when "single"      then "Single"
+        when "compilation" then "Compilation"
+        end
+      end
+
     end
   end
 end

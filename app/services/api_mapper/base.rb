@@ -1,22 +1,17 @@
 module ApiMapper
   class Base
     class << self
-      def api_to_app_model(api_model)
-        attr_map = {}
-        api_attr_mappings.each do |api_attr, model_attr|
-          api_value = api_model.send(api_attr)
-          attr_map[model_attr] = convert_api_value(api_attr, api_value)
-        end
-        target_model_class.find_by(api_id: attr_map[:api_id]) ||
-          target_model_class.new(**attr_map)
+      def api_to_app_model(api_model, shallow: false)
+        api_id = api_model.id
+        app_model = target_model_class.find_or_initialize_by(api_id:)
+        transfer_into_model(api_model, app_model, shallow:)
+        app_model
       end
 
-      def api_values_into_model(api_model, model)
-        api_attr_mappings.each do |api_attr, model_attr|
-          api_value = api_model.send(api_attr)
-          model.send("#{model_attr}=", convert_api_value(api_attr, api_value))
-        end
-        model
+      def transfer_into_model(api_model, app_model, shallow: false)
+        fill_collections(api_model, app_model) unless shallow
+        fill_flat_attributes(api_model, app_model)
+        app_model
       end
 
       private
@@ -24,13 +19,18 @@ module ApiMapper
           const_get(name.rpartition("::").last)
         end
 
-        def convert_api_value(api_attr, api_value)
-          mapping_function = api_value_mappings[api_attr]
-          mapping_function&.call(api_value) || api_value
+        def get_full_collection(api_model, api_attr, filters: {})
+          limit, offset = 50, 0
+          results = []
+          loop do
+            collection = api_model.send(api_attr, limit:, offset:, **filters)
+            offset += limit
+            results += collection
+            break if collection.size < limit
+          end
+          results
         end
 
-        # Override on subclasses that need it
-        def api_value_mappings = {}
     end
   end
 end
