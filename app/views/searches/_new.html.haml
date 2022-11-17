@@ -1,11 +1,19 @@
-= form_with url: search_path, method: :get, scope: "search" do |form|
-  .field
-  = form.label :entity
-  = form.collection_select :entity, searchable_entities.keys, :to_s, :to_s #, include_blank: false
+.search{class: "rounded bg-rose-200 p-8 flex flex-col gap-8"}
+  %h2 Search for an album or artist
+  = form_with url: search_path,
+    method: :get,
+    scope: "search",
+    class: "flex flex-col gap-4 items-center" do |form|
+    .field{class: "flex flex-col self-start"}
+      = form.label :entity
+      = form.collection_select :entity, searchable_entities.keys, :to_s, :to_s #, include_blank: false
 
-  .field
-  = form.label :query
-  = form.text_field :query
+    .field{class: "flex flex-col"}
+      = form.label :query
+      = form.text_field :query
 
-  .actions
-  = form.submit "Search"
+    .actions
+    = form.submit "Search", class: "btn-color"
+
+    .notice
+      Search powered by Spotify.

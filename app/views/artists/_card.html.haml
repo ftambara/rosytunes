@@ -1,3 +1,13 @@
-%article.artist_card{class: "p-4 border-2 border-rose-700 rounded w-48 h-72"}
-  %a{href: artist_path(artist)}
-    %h2.name= artist.name
+%article.artist_card{class: "flex gap-4 content-center p-4 bg-rose-200 rounded w-80 h-40"}
+  .cover{class: "h-32 w-32 grow-0 shrink-0 justify-self-start"}
+    - if artist.cover
+      %p{class: "text-xs"} Open on Spotify
+      = link_to (image_tag artist.cover, class: "h-28 w-28"), artist.external_uri
+  .info{class: "w-full overflow-hidden"}
+    %h2.name{class: "font-bold text-rose-700 max-h-20 overflow-hidden"}
+      = link_to artist.name, artist_path(artist)
+    %ul.albums
+      - artist.albums.each do |album|
+        %li.album_name{class: "overflow-hidden"}
+          = album.name
+

@@ -1,3 +1,4 @@
-%main
-  %p.welcome Keep track of your musical journey!
-  .searchbox= render partial: "searches/new"
+%main{class: "flex flex-col p-8 gap-16 items-center content-center justify-center"}
+  %p.welcome
+    Track your musical journey.
+  = render partial: "searches/new"

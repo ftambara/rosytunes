@@ -12,4 +12,5 @@
   %body{class: "w-screen bg-white"}
     = render "layouts/notifications"
     = render "layouts/header"
-    = yield
+    %main{class: "px-16 py-8 flex justify-center align-center"}
+      = yield

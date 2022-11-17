@@ -44,7 +44,7 @@ class MusicLibraryGatewayTest < ActiveSupport::TestCase
   end
 
   test "it finds an album" do
-    model = VCR.use_cassette("album:appetite_for_destruction") do
+    model = VCR.use_cassette("album:find:appetite_for_destruction") do
       @gateway.find(albums(:appetite_for_destruction))
     end
     assert_kind_of Album, model

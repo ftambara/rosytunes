@@ -1,6 +1,12 @@
-%article.artist
-  %h1.title= @artist.name
-  %h2.albums= "Album".pluralize(@artist.albums.count)
-  %ul.albums_list 
+%article.artist{class: "md:w-3/4"}
+  %header{class: "flex bg-rose-700 text-white gap-8 p-8 rounded-t-lg"}
+    - if @artist.cover
+      .cover{class: "grow-0 w-40"}
+        %p{class: "text-sm"} Listen on Spotify
+        = link_to (image_tag @artist.cover), @artist.external_uri
+      .info
+        %h1.title= @artist.name
+  .albums{class: "w-full flex flex-wrap justify-around gap-8 p-8 rounded-b-lg bg-rose-200"}
     - @artist.albums.each do |album|
-      %li.album_name= album.name
+      - cache album do
+        = render "albums/card", album:
