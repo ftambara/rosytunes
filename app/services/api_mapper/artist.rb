@@ -4,7 +4,9 @@ module ApiMapper
       def api_class = RSpotify::Artist
 
       def fill_flat_attributes(api_model, app_model)
-        app_model.name = api_model.name
+        app_model.name         = api_model.name
+        app_model.cover        = api_model.images&.last&.fetch("url")
+        app_model.external_uri = api_model.uri
       end
 
       def fill_collections(api_model, app_model)

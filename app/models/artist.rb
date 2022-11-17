@@ -5,5 +5,5 @@ class Artist < ApplicationRecord
     presence: true,
     uniqueness: true
 
-  lib_attr_accessor :name, :albums
+  lib_attr_accessor :name, :cover, :external_uri, :albums
 end
