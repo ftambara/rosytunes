@@ -7,6 +7,8 @@ module ApiMapper
         app_model.name         = api_model.name
         app_model.release_date = api_model.release_date
         app_model.release_type = convert_album_type(api_model.album_type)
+        app_model.cover        = api_model.images.second["url"]
+        app_model.external_uri = api_model.uri
       end
 
       def fill_collections(api_model, app_model)

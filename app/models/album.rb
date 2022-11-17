@@ -8,5 +8,6 @@ class Album < ApplicationRecord
     presence: true,
     uniqueness: true
 
-  lib_attr_accessor :name, :release_type, :release_date, :artists, :songs
+  lib_attr_accessor :name, :release_type, :release_date, :cover, :external_uri,
+    :artists, :songs
 end

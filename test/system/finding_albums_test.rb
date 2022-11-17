@@ -12,6 +12,8 @@ class FindingAlbumsTest < ApplicationSystemTestCase
     click_on "Search"
     sleep(10)
 
-    find(".album_card", match: :first).click_link
+    find(".album_card .name",
+         text: "Appetite For Destruction",
+         match: :first).click_link
   end
 end
