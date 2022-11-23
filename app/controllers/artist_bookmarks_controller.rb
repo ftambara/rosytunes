@@ -17,9 +17,20 @@ class ArtistBookmarksController < ApplicationController
     end
   end
 
+  def destroy
+    @bookmark = ArtistBookmark.find(params[:id])
+    @bookmark.destroy
+
+    respond_to do |format|
+      format.html { redirect_back_or_to(root_path) }
+    end
+  end
+
   private
     def authwall_if_disallowed
-      redirect_back_or_to(root_path) unless allowed_user?(params[:user_id])
+      unless allowed_user?(params[:user_id])
+        redirect_back_or_to(root_path, error: "That's not yours!")
+      end
     end
 
     def allowed_user?(declared_id)

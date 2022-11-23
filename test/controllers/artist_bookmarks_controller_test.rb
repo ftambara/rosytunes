@@ -6,6 +6,7 @@ class ArtistControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
     @artist = artists(:guns_n_roses)
+    @bookmark = ArtistBookmark.create(user: @user, artist: @artist)
   end
 
   test "can create an bookmark for the current user" do
@@ -35,11 +36,25 @@ class ArtistControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "can delete a bookmark for the current user" do
+    sign_in(@user)
+    assert_difference("ArtistBookmark.count", -1) do
+      delete user_artist_bookmark_path(@bookmark, user_id: @user.id)
+    end
+    assert_response :redirect
   end
 
   test "cannot delete a bookmark as a guest" do
+    assert_no_difference("ArtistBookmark.count") do
+      delete user_artist_bookmark_path(@bookmark, user_id: @user.id)
+    end
+    assert_response :redirect
   end
 
   test "cannot delete a bookmark for another user" do
+    sign_in(users(:two))
+    assert_no_difference("ArtistBookmark.count") do
+      delete user_artist_bookmark_path(@bookmark, user_id: @user.id)
+    end
+    assert_response :redirect
   end
 end
