@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_13_101900) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_23_142244) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_13_101900) do
     t.index ["album_id", "song_id"], name: "index_albums_songs_on_album_id_and_song_id"
   end
 
+  create_table "artist_bookmarks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "artist_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_artist_bookmarks_on_artist_id"
+    t.index ["user_id"], name: "index_artist_bookmarks_on_user_id"
+  end
+
   create_table "artists", force: :cascade do |t|
     t.string "api_id", limit: 30, null: false
     t.datetime "created_at", null: false
@@ -44,6 +53,35 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_13_101900) do
     t.bigint "artist_id", null: false
     t.bigint "song_id", null: false
     t.index ["artist_id", "song_id"], name: "index_artists_songs_on_artist_id_and_song_id"
+  end
+
+  create_table "qualifications", force: :cascade do |t|
+    t.bigint "quality_id", null: false
+    t.bigint "rating_id", null: false
+    t.integer "modifier", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quality_id"], name: "index_qualifications_on_quality_id"
+    t.index ["rating_id"], name: "index_qualifications_on_rating_id"
+  end
+
+  create_table "qualities", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "positive_variant"
+    t.string "negative_variant"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_qualities_on_name", unique: true
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "song_id", null: false
+    t.integer "opinion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_ratings_on_song_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "songs", force: :cascade do |t|
@@ -80,4 +118,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_13_101900) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "artist_bookmarks", "artists"
+  add_foreign_key "artist_bookmarks", "users"
+  add_foreign_key "qualifications", "qualities"
+  add_foreign_key "qualifications", "ratings"
+  add_foreign_key "ratings", "songs"
+  add_foreign_key "ratings", "users"
 end
