@@ -1,0 +1,7 @@
+- if bookmark
+  = button_to "Unsave",
+    user_artist_bookmark_path(user, bookmark), method: :delete, class: "btn-clear"
+- else
+  = form_with(scope: :artist_bookmark, url: user_artist_bookmarks_path(user)) do |form|
+    = form.hidden_field :artist_id, value: artist.id, readonly: true
+    = form.submit "Save", class: "btn-clear"

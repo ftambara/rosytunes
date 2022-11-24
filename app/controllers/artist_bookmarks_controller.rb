@@ -18,7 +18,7 @@ class ArtistBookmarksController < ApplicationController
   end
 
   def destroy
-    @bookmark = ArtistBookmark.find_by(artist_id: params[:artist_id])
+    @bookmark = get_bookmark
     @bookmark.destroy
 
     respond_to do |format|
@@ -39,6 +39,10 @@ class ArtistBookmarksController < ApplicationController
 
     def set_user
       @user = current_user
+    end
+
+    def get_bookmark
+      ArtistBookmark.find(params[:id])
     end
 
     def bookmark_params

@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ArtistControllerTest < ActionDispatch::IntegrationTest
+class ArtistBookmarksControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
@@ -13,7 +13,7 @@ class ArtistControllerTest < ActionDispatch::IntegrationTest
     sign_in(@user)
     params = { artist_bookmark: { artist_id: @artist.id } }
     assert_difference("ArtistBookmark.count", 1) do
-      post user_artist_bookmarks_path(user_id: @user.id), params:
+      post user_artist_bookmarks_path(@user), params:
     end
     assert_response :redirect
   end
@@ -21,7 +21,7 @@ class ArtistControllerTest < ActionDispatch::IntegrationTest
   test "cannot create a bookmark as a guest" do
     params = { artist_bookmark: { artist_id: @artist.id } }
     assert_no_difference("ArtistBookmark.count") do
-      post user_artist_bookmarks_path(user_id: @user.id), params:
+      post user_artist_bookmarks_path(@user), params:
     end
     assert_response :redirect
   end
@@ -30,7 +30,7 @@ class ArtistControllerTest < ActionDispatch::IntegrationTest
     sign_in(users(:two))
     params = { artist_bookmark: { artist_id: @artist.id } }
     assert_no_difference("ArtistBookmark.count") do
-      post user_artist_bookmarks_path(user_id: @user.id), params:
+      post user_artist_bookmarks_path(@user), params:
     end
     assert_response :redirect
   end
@@ -38,14 +38,14 @@ class ArtistControllerTest < ActionDispatch::IntegrationTest
   test "can delete a bookmark for the current user" do
     sign_in(@user)
     assert_difference("ArtistBookmark.count", -1) do
-      delete user_artist_bookmark_path(@bookmark, user_id: @user.id)
+      delete user_artist_bookmark_path(@user, @bookmark)
     end
     assert_response :redirect
   end
 
   test "cannot delete a bookmark as a guest" do
     assert_no_difference("ArtistBookmark.count") do
-      delete user_artist_bookmark_path(@bookmark, user_id: @user.id)
+      delete user_artist_bookmark_path(@user, @bookmark)
     end
     assert_response :redirect
   end
@@ -53,7 +53,7 @@ class ArtistControllerTest < ActionDispatch::IntegrationTest
   test "cannot delete a bookmark for another user" do
     sign_in(users(:two))
     assert_no_difference("ArtistBookmark.count") do
-      delete user_artist_bookmark_path(@bookmark, user_id: @user.id)
+      delete user_artist_bookmark_path(@user, @bookmark)
     end
     assert_response :redirect
   end
