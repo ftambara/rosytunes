@@ -1,0 +1,3 @@
+= form_with(scope: :artist_bookmark, url: user_artist_bookmarks_path(user_id: user.id)) do |form|
+  = form.hidden_field :artist_id, value: artist.id, readonly: true
+  = form.submit "Save", class: "btn-clear"

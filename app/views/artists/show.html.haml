@@ -6,6 +6,13 @@
         = link_to (image_tag @artist.cover), @artist.external_uri
       .info
         %h1.title= @artist.name
+      - if signed_in?
+        .actions
+          - if current_user.bookmarked_artist?(@artist)
+            = button_to "Unsave", user_artist_bookmark_path(artist_id: @artist.id, user_id: current_user.id), method: :delete
+          - else
+            = render "artist_bookmarks/new_bookmark_button",
+                user: current_user, artist: @artist
   .albums{class: "w-full flex flex-wrap justify-around gap-8 p-8 rounded-b-lg bg-rose-200"}
     - @artist.albums.each do |album|
       - cache album do
