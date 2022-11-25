@@ -12,7 +12,7 @@
         - if user_signed_in?
           .user_nav{class:"flex gap-8 items-center"}
             .profile
-              = button_to "#{current_user.name}'s profile", "#", class: "btn-clear"
+              = link_to "#{current_user.name}'s profile", user_path(current_user), class: "btn-clear"
             = button_to "Sign out", destroy_user_session_path, class: "btn-color", method: :delete
         - else
           .guest_nav{class:"flex gap-8 items-center"}

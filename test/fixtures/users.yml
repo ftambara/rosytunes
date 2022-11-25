@@ -5,3 +5,9 @@ one:
   email: unique-email@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, "wisecracker") %>
   confirmed_at: <%= 2.hours.ago %>
+
+two:
+  name: name
+  email: second-email@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, "wisecracker") %>
+  confirmed_at: <%= 2.hours.ago %>

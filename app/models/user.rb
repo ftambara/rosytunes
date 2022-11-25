@@ -4,4 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable
+
+  has_many :artist_bookmarks
+  has_many :artists, through: :artist_bookmarks
+
+  def bookmarked_artist?(artist)
+    !artists.where(id: artist.id).empty?
+  end
 end
