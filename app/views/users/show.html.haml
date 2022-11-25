@@ -1,0 +1,5 @@
+%main{class: "flex flex-col p-8 gap-16 items-center content-center justify-center"}
+  %h2 Your saved artists
+
+  - current_user.artists.each do |artist|
+    = render "artists/artist", artist:, user: current_user, collapsable: true

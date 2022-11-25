@@ -12,8 +12,7 @@ class FindingAlbumsTest < ApplicationSystemTestCase
     click_on "#{user.name}'s profile"
     assert ".album", count: 1
 
-    click_on "Unsave"
-    click_on "#{user.name}'s profile"
+    click_on "Unsave", wait: 20
     assert ".album", count: 0
   end
 end
