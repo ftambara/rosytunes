@@ -1,4 +1,4 @@
-- if bookmark
+- if (bookmark = find_artist_bookmark(user:, artist:))
   = button_to "Unsave",
     user_artist_bookmark_path(user, bookmark), method: :delete, class: "btn-clear"
 - else
